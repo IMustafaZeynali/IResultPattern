@@ -3,7 +3,7 @@ name: Publish to NuGet
 on:
   push:
     branches:
-      - master  # فقط وقتی روی main push می‌کنی اجرا میشه
+      - master
     tags:
       - 'v*'  # یا هر وقت تگ جدید با فرمت v1.0.0 ساختی
 
