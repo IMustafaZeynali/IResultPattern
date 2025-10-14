@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace IMustafaZeynali.ResultPattern
+namespace IMustafaZeynali.IResultPattern
 {
     public struct ResultList<TData> : IResult
           where TData : class
