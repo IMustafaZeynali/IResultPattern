@@ -21,12 +21,12 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static ResultList<TData> Failure(string errorMessages)
+        public static ResultList<TData> Failure(string errorMessage)
         {
             return new ResultList<TData>()
             {
                 IsSuccess = false,
-                Message = errorMessages,
+                Message = errorMessage,
             };
         }
 
