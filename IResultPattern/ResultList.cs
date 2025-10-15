@@ -7,7 +7,6 @@ namespace IMustafaZeynali.IResultPattern
     {
         public bool IsSuccess { get; private set; }
         public string? Message { get; private set; }
-
         public IEnumerable<TData>? Data { get; private set; }
         public int TotalCount { get; private set; }
 
