@@ -17,11 +17,6 @@
             };
         }
 
-        public static implicit operator Result<TData>(TData data)
-        {
-            return Success(data);
-        }
-
         public static Result<TData> Failure(string errorMessage)
         {
             return new Result<TData>()
@@ -30,6 +25,12 @@
                 Message = errorMessage,
             };
         }
+
+        public static implicit operator Result<TData>(TData data)
+        {
+            return Success(data);
+        }
+
     }
 
 
