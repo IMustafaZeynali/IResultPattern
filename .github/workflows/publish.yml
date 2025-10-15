@@ -1,11 +1,8 @@
 name: Publish to NuGet
 
 on:
-  push:
-    branches:
-      - master
-    tags:
-      - 'v*'  # یا هر وقت تگ جدید با فرمت v1.0.0 ساختی
+  release:
+    types: [published] 
 
 jobs:
   build:
