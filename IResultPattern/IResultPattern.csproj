@@ -11,6 +11,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
+		<PackageId>IResultPattern</PackageId>
 		<Description>
 			A lightweight and expressive result‑handling package designed for .NET applications.
 		</Description>
