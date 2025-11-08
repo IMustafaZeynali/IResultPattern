@@ -1,10 +1,35 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <Nullable>enable</Nullable>
-    <Version>1.3.0</Version>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<Nullable>enable</Nullable>
+		<Version>1.3.0</Version>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<IncludeSource>false</IncludeSource>
+		<IncludeSymbols>false</IncludeSymbols>
+		<DebugType>none</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Description>
+			A lightweight and expressive result‑handling package designed for .NET applications.
+		</Description>
+		<PackageTags>result;pattern;dotnet;result-pattern</PackageTags>
+		<Authors>IMustafa Zeynali</Authors>
+		<Company>IMustafa Zeynali</Company>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md" Pack="true" PackagePath="\" />
+		<None Include="..\LICENSE" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+	</PropertyGroup>
 
 </Project>
