@@ -6,14 +6,14 @@ namespace IMustafaZeynali.IResultPattern
     public struct ResultList<TData> : IResult, IPageInfo
           where TData : class
     {
-        public bool IsSuccess { get; private set; }
-        public string? Message { get; private set; }
-        public IEnumerable<TData>? Data { get; private set; }
+        public bool IsSuccess { get; set; }
+        public string? Message { get; set; }
+        public IEnumerable<TData>? Data { get; set; }
 
-        public int TotalItemCount { get; private set; }
-        public int PageCount { get; private set; }
-        public int PageNumber { get; private set; }
-        public int PageSize { get; private set; }
+        public int TotalItemCount { get; set; }
+        public int PageCount { get; set; }
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
 
         public static ResultList<TData> Success(
             IEnumerable<TData> data,

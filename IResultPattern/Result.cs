@@ -3,10 +3,9 @@
     public struct Result<TData> : IResult
             where TData : class
     {
-        public bool IsSuccess { get; private set; }
-        public string? Message { get; private set; }
-
-        public TData? Data { get; private set; }
+        public bool IsSuccess { get; set; }
+        public string? Message { get; set; }
+        public TData? Data { get; set; }
 
         public static Result<TData> Success(TData data)
         {
@@ -36,8 +35,8 @@
 
     public struct Result : IResult
     {
-        public bool IsSuccess { get; private set; }
-        public string? Message { get; private set; }
+        public bool IsSuccess { get; set; }
+        public string? Message { get; set; }
 
         public static Result Success()
         {
