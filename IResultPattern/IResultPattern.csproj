@@ -33,4 +33,10 @@
 		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<PackageProjectUrl>https://github.com/IMustafaZeynali/IResultPattern</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/IMustafaZeynali/IResultPattern</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+	</PropertyGroup>
+	
 </Project>
