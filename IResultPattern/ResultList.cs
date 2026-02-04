@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace IMustafaZeynali.IResultPattern
 {
@@ -24,7 +26,7 @@ namespace IMustafaZeynali.IResultPattern
                 Data = data,
                 IsSuccess = true,
                 TotalItemCount = totalItemCount,
-                PageCount = 1,
+                PageCount = ((int)(Math.Round(((decimal)(totalItemCount / data.Count())), 0, MidpointRounding.AwayFromZero))),
                 PageNumber = 1,
                 PageSize = totalItemCount,
             };
