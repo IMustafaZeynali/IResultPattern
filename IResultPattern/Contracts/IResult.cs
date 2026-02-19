@@ -1,4 +1,4 @@
-﻿namespace IResultPattern.Contracts
+﻿namespace IResultPattern
 {
     public interface IResult
     {
