@@ -1,4 +1,5 @@
 ﻿using IResultPattern;
+using System;
 
 namespace IMustafaZeynali.IResultPattern
 {
@@ -8,6 +9,21 @@ namespace IMustafaZeynali.IResultPattern
         public bool IsSuccess { get; set; }
         public string? Message { get; set; }
         public TData? Data { get; set; }
+        public ResultStatusCode StatusCode { get; set; }
+        public string StatusCodeTitle => this.StatusCode.ToString();
+
+
+        [Obsolete("Use specific status instead.")]
+        public static Result<TData> Failure(string errorMessage)
+        {
+            return new Result<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.Failure,
+            };
+        }
+
 
         public static Result<TData> Success(TData data)
         {
@@ -15,17 +31,112 @@ namespace IMustafaZeynali.IResultPattern
             {
                 Data = data,
                 IsSuccess = true,
+                StatusCode = ResultStatusCode.Success,
             };
         }
 
-        public static Result<TData> Failure(string errorMessage)
+        public static Result<TData> Created(string errorMessage)
         {
             return new Result<TData>()
             {
                 IsSuccess = false,
                 Message = errorMessage,
+                StatusCode = ResultStatusCode.Created,
             };
         }
+
+        public static Result<TData> NoContent(string errorMessage)
+        {
+            return new Result<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.NoContent,
+            };
+        }
+
+
+        public static Result<TData> BadRequest(string errorMessage)
+        {
+            return new Result<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.BadRequest,
+            };
+        }
+
+        public static Result<TData> UnAuthorized(string errorMessage)
+        {
+            return new Result<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.UnAuthorized,
+            };
+        }
+
+        public static Result<TData> Forbidden(string errorMessage)
+        {
+            return new Result<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.Forbidden,
+            };
+        }
+
+        public static Result<TData> NotFound(string errorMessage)
+        {
+            return new Result<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.NotFound,
+            };
+        }
+
+        public static Result<TData> Conflict(string errorMessage)
+        {
+            return new Result<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.Conflict,
+            };
+        }
+
+        public static Result<TData> ValidationError(string errorMessage)
+        {
+            return new Result<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.ValidationError,
+            };
+        }
+
+
+        public static Result<TData> InternalServerError(string errorMessage)
+        {
+            return new Result<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.InternalServerError,
+            };
+        }
+
+        public static Result<TData> ServiceUnavailable(string errorMessage)
+        {
+            return new Result<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.ServiceUnavailable,
+            };
+        }
+
 
         public static implicit operator Result<TData>(TData data)
         {
@@ -39,21 +150,130 @@ namespace IMustafaZeynali.IResultPattern
     {
         public bool IsSuccess { get; set; }
         public string? Message { get; set; }
+        public ResultStatusCode StatusCode { get; set; }
+        public string StatusCodeTitle => this.StatusCode.ToString();
 
-        public static Result Success()
-        {
-            return new Result()
-            {
-                IsSuccess = true,
-            };
-        }
 
+        [Obsolete("Use specific status instead.")]
         public static Result Failure(string errorMessage)
         {
             return new Result()
             {
                 IsSuccess = false,
                 Message = errorMessage,
+                StatusCode = ResultStatusCode.Failure,
+            };
+        }
+
+
+        public static Result Success()
+        {
+            return new Result()
+            {
+                IsSuccess = true,
+                StatusCode = ResultStatusCode.Success,
+            };
+        }
+
+        public static Result Created(string errorMessage)
+        {
+            return new Result()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.Created,
+            };
+        }
+
+        public static Result NoContent(string errorMessage)
+        {
+            return new Result()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.NoContent,
+            };
+        }
+
+
+        public static Result BadRequest(string errorMessage)
+        {
+            return new Result()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.BadRequest,
+            };
+        }
+
+        public static Result UnAuthorized(string errorMessage)
+        {
+            return new Result()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.UnAuthorized,
+            };
+        }
+
+        public static Result Forbidden(string errorMessage)
+        {
+            return new Result()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.Forbidden,
+            };
+        }
+
+        public static Result NotFound(string errorMessage)
+        {
+            return new Result()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.NotFound,
+            };
+        }
+
+        public static Result Conflict(string errorMessage)
+        {
+            return new Result()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.Conflict,
+            };
+        }
+
+        public static Result ValidationError(string errorMessage)
+        {
+            return new Result()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.ValidationError,
+            };
+        }
+
+
+        public static Result InternalServerError(string errorMessage)
+        {
+            return new Result()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.InternalServerError,
+            };
+        }
+
+        public static Result ServiceUnavailable(string errorMessage)
+        {
+            return new Result()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.ServiceUnavailable,
             };
         }
 

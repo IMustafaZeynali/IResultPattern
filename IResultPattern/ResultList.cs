@@ -17,6 +17,21 @@ namespace IMustafaZeynali.IResultPattern
         public int PageCount { get; set; }
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
+        public ResultStatusCode StatusCode { get; set; }
+        public string StatusCodeTitle => this.StatusCode.ToString();
+
+
+        [Obsolete("Use specific status instead.")]
+        public static ResultList<TData> Failure(string errorMessage)
+        {
+            return new ResultList<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.Failure,
+            };
+        }
+
 
         public static ResultList<TData> Success(
             IEnumerable<TData> data,
@@ -30,6 +45,7 @@ namespace IMustafaZeynali.IResultPattern
                 PageCount = ((int)(Math.Round(((decimal)(totalItemCount / data.Count())), 0, MidpointRounding.AwayFromZero))),
                 PageNumber = 1,
                 PageSize = totalItemCount,
+                StatusCode = ResultStatusCode.Success,
             };
         }
 
@@ -45,15 +61,109 @@ namespace IMustafaZeynali.IResultPattern
                 PageCount = pageInfo.PageCount,
                 PageNumber = pageInfo.PageNumber,
                 PageSize = pageInfo.PageSize,
+                StatusCode = ResultStatusCode.Success,
             };
         }
 
-        public static ResultList<TData> Failure(string errorMessage)
+        public static ResultList<TData> Created(string errorMessage)
         {
             return new ResultList<TData>()
             {
                 IsSuccess = false,
                 Message = errorMessage,
+                StatusCode = ResultStatusCode.Created,
+            };
+        }
+
+        public static ResultList<TData> NoContent(string errorMessage)
+        {
+            return new ResultList<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.NoContent,
+            };
+        }
+
+
+        public static ResultList<TData> BadRequest(string errorMessage)
+        {
+            return new ResultList<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.BadRequest,
+            };
+        }
+
+        public static ResultList<TData> UnAuthorized(string errorMessage)
+        {
+            return new ResultList<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.UnAuthorized,
+            };
+        }
+
+        public static ResultList<TData> Forbidden(string errorMessage)
+        {
+            return new ResultList<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.Forbidden,
+            };
+        }
+
+        public static ResultList<TData> NotFound(string errorMessage)
+        {
+            return new ResultList<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.NotFound,
+            };
+        }
+
+        public static ResultList<TData> Conflict(string errorMessage)
+        {
+            return new ResultList<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.Conflict,
+            };
+        }
+
+        public static ResultList<TData> ValidationError(string errorMessage)
+        {
+            return new ResultList<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.ValidationError,
+            };
+        }
+
+
+        public static ResultList<TData> InternalServerError(string errorMessage)
+        {
+            return new ResultList<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.InternalServerError,
+            };
+        }
+
+        public static ResultList<TData> ServiceUnavailable(string errorMessage)
+        {
+            return new ResultList<TData>()
+            {
+                IsSuccess = false,
+                Message = errorMessage,
+                StatusCode = ResultStatusCode.ServiceUnavailable,
             };
         }
 
