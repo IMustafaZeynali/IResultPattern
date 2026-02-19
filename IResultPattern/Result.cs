@@ -1,4 +1,4 @@
-﻿using IResultPattern.Contracts;
+﻿using IResultPattern;
 
 namespace IMustafaZeynali.IResultPattern
 {
