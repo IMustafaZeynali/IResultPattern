@@ -57,12 +57,12 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result UnAuthorized(string? errorMessage = null)
+        public static Result Unauthorized(string? errorMessage = null)
         {
             return new Result()
             {
                 Message = errorMessage,
-                StatusCode = ResultStatus.UnAuthorized,
+                StatusCode = ResultStatus.Unauthorized,
             };
         }
 

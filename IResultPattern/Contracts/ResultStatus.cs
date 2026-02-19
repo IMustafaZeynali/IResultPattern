@@ -9,7 +9,7 @@ namespace IMustafaZeynali.IResultPattern
         NoContent = 204,
 
         BadRequest = 400,
-        UnAuthorized = 401,
+        Unauthorized = 401,
         Forbidden = 403,
         NotFound = 404,
         Conflict = 409,

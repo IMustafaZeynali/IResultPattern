@@ -60,12 +60,12 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result<TData> UnAuthorized(string? errorMessage = null)
+        public static Result<TData> Unauthorized(string? errorMessage = null)
         {
             return new Result<TData>()
             {
                 Message = errorMessage,
-                StatusCode = ResultStatus.UnAuthorized,
+                StatusCode = ResultStatus.Unauthorized,
             };
         }
 
