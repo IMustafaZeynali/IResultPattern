@@ -2,7 +2,7 @@
 
 namespace IMustafaZeynali.IResultPattern
 {
-    public enum ResultStatusCode : uint
+    public enum ResultStatus : uint
     {
         [Obsolete("Use specific status instead.")]
         Failure = 0,

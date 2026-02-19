@@ -8,8 +8,8 @@ namespace IMustafaZeynali.IResultPattern
         public bool IsSuccess { get; set; }
         public string? Message { get; set; }
         public TData? Data { get; set; }
-        public ResultStatusCode StatusCode { get; set; }
-        public string StatusCodeTitle => this.StatusCode.ToString();
+        public ResultStatus StatusCode { get; set; }
+        public string StatusTitle => this.StatusCode.ToString();
 
 
         [Obsolete("Use specific status instead.")]
@@ -19,7 +19,7 @@ namespace IMustafaZeynali.IResultPattern
             {
                 IsSuccess = false,
                 Message = errorMessage,
-                StatusCode = ResultStatusCode.Failure,
+                StatusCode = ResultStatus.Failure,
             };
         }
 
@@ -30,7 +30,7 @@ namespace IMustafaZeynali.IResultPattern
             {
                 Data = data,
                 IsSuccess = true,
-                StatusCode = ResultStatusCode.Success,
+                StatusCode = ResultStatus.Success,
             };
         }
 
@@ -40,7 +40,7 @@ namespace IMustafaZeynali.IResultPattern
             {
                 IsSuccess = false,
                 Message = errorMessage,
-                StatusCode = ResultStatusCode.Created,
+                StatusCode = ResultStatus.Created,
             };
         }
 
@@ -50,7 +50,7 @@ namespace IMustafaZeynali.IResultPattern
             {
                 IsSuccess = false,
                 Message = errorMessage,
-                StatusCode = ResultStatusCode.NoContent,
+                StatusCode = ResultStatus.NoContent,
             };
         }
 
@@ -61,7 +61,7 @@ namespace IMustafaZeynali.IResultPattern
             {
                 IsSuccess = false,
                 Message = errorMessage,
-                StatusCode = ResultStatusCode.BadRequest,
+                StatusCode = ResultStatus.BadRequest,
             };
         }
 
@@ -71,7 +71,7 @@ namespace IMustafaZeynali.IResultPattern
             {
                 IsSuccess = false,
                 Message = errorMessage,
-                StatusCode = ResultStatusCode.UnAuthorized,
+                StatusCode = ResultStatus.UnAuthorized,
             };
         }
 
@@ -81,7 +81,7 @@ namespace IMustafaZeynali.IResultPattern
             {
                 IsSuccess = false,
                 Message = errorMessage,
-                StatusCode = ResultStatusCode.Forbidden,
+                StatusCode = ResultStatus.Forbidden,
             };
         }
 
@@ -91,7 +91,7 @@ namespace IMustafaZeynali.IResultPattern
             {
                 IsSuccess = false,
                 Message = errorMessage,
-                StatusCode = ResultStatusCode.NotFound,
+                StatusCode = ResultStatus.NotFound,
             };
         }
 
@@ -101,7 +101,7 @@ namespace IMustafaZeynali.IResultPattern
             {
                 IsSuccess = false,
                 Message = errorMessage,
-                StatusCode = ResultStatusCode.Conflict,
+                StatusCode = ResultStatus.Conflict,
             };
         }
 
@@ -111,7 +111,7 @@ namespace IMustafaZeynali.IResultPattern
             {
                 IsSuccess = false,
                 Message = errorMessage,
-                StatusCode = ResultStatusCode.ValidationError,
+                StatusCode = ResultStatus.ValidationError,
             };
         }
 
@@ -122,7 +122,7 @@ namespace IMustafaZeynali.IResultPattern
             {
                 IsSuccess = false,
                 Message = errorMessage,
-                StatusCode = ResultStatusCode.InternalServerError,
+                StatusCode = ResultStatus.InternalServerError,
             };
         }
 
@@ -132,7 +132,7 @@ namespace IMustafaZeynali.IResultPattern
             {
                 IsSuccess = false,
                 Message = errorMessage,
-                StatusCode = ResultStatusCode.ServiceUnavailable,
+                StatusCode = ResultStatus.ServiceUnavailable,
             };
         }
 
