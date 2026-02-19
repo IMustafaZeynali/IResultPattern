@@ -5,7 +5,7 @@ namespace IMustafaZeynali.IResultPattern
     public struct Result<TData> : IResult
               where TData : class
     {
-        public bool IsSuccess { get; set; }
+        public bool IsSuccess => StatusCode == ResultStatus.Success;
         public string? Message { get; set; }
         public TData? Data { get; set; }
         public ResultStatus StatusCode { get; set; }
@@ -17,7 +17,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new Result<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.Failure,
             };
@@ -29,7 +28,6 @@ namespace IMustafaZeynali.IResultPattern
             return new Result<TData>()
             {
                 Data = data,
-                IsSuccess = true,
                 StatusCode = ResultStatus.Success,
             };
         }
@@ -38,7 +36,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new Result<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.Created,
             };
@@ -48,7 +45,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new Result<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.NoContent,
             };
@@ -59,7 +55,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new Result<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.BadRequest,
             };
@@ -69,7 +64,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new Result<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.UnAuthorized,
             };
@@ -79,7 +73,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new Result<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.Forbidden,
             };
@@ -89,7 +82,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new Result<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.NotFound,
             };
@@ -99,7 +91,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new Result<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.Conflict,
             };
@@ -109,7 +100,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new Result<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.ValidationError,
             };
@@ -120,7 +110,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new Result<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.InternalServerError,
             };
@@ -130,7 +119,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new Result<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.ServiceUnavailable,
             };

@@ -8,7 +8,7 @@ namespace IMustafaZeynali.IResultPattern
     public struct ResultList<TData> : IResult, IPageInfo
           where TData : class
     {
-        public bool IsSuccess { get; set; }
+        public bool IsSuccess => StatusCode == ResultStatus.Success;
         public string? Message { get; set; }
         public IEnumerable<TData>? Data { get; set; }
 
@@ -25,7 +25,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new ResultList<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.Failure,
             };
@@ -39,7 +38,6 @@ namespace IMustafaZeynali.IResultPattern
             return new ResultList<TData>()
             {
                 Data = data,
-                IsSuccess = true,
                 TotalItemCount = totalItemCount,
                 PageCount = ((int)(Math.Round(((decimal)(totalItemCount / data.Count())), 0, MidpointRounding.AwayFromZero))),
                 PageNumber = 1,
@@ -55,7 +53,6 @@ namespace IMustafaZeynali.IResultPattern
             return new ResultList<TData>()
             {
                 Data = data,
-                IsSuccess = true,
                 TotalItemCount = pageInfo.TotalItemCount,
                 PageCount = pageInfo.PageCount,
                 PageNumber = pageInfo.PageNumber,
@@ -68,7 +65,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new ResultList<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.Created,
             };
@@ -78,7 +74,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new ResultList<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.NoContent,
             };
@@ -89,7 +84,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new ResultList<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.BadRequest,
             };
@@ -99,7 +93,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new ResultList<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.UnAuthorized,
             };
@@ -109,7 +102,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new ResultList<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.Forbidden,
             };
@@ -119,7 +111,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new ResultList<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.NotFound,
             };
@@ -129,7 +120,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new ResultList<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.Conflict,
             };
@@ -139,7 +129,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new ResultList<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.ValidationError,
             };
@@ -150,7 +139,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new ResultList<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.InternalServerError,
             };
@@ -160,7 +148,6 @@ namespace IMustafaZeynali.IResultPattern
         {
             return new ResultList<TData>()
             {
-                IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatus.ServiceUnavailable,
             };
