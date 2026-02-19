@@ -1,7 +1,7 @@
 ﻿# iResultPattern
 A lightweight and expressive result‑handling package designed for .NET applications.
-
-# 🚀 IResult Pattern – A Clean, Explicit and Production-Ready Result Model for .NET
+<br>
+🚀 IResult Pattern – A Clean, Explicit and Production-Ready Result Model for .NET
 
 Stop returning raw exceptions.
 Stop mixing business logic with HTTP responses.
