@@ -35,7 +35,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result<TData> Created(string errorMessage)
+        public static Result<TData> Created(string? errorMessage = null)
         {
             return new Result<TData>()
             {
@@ -45,7 +45,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result<TData> NoContent(string errorMessage)
+        public static Result<TData> NoContent(string? errorMessage = null)
         {
             return new Result<TData>()
             {
@@ -56,7 +56,7 @@ namespace IMustafaZeynali.IResultPattern
         }
 
 
-        public static Result<TData> BadRequest(string errorMessage)
+        public static Result<TData> BadRequest(string? errorMessage = null)
         {
             return new Result<TData>()
             {
@@ -66,7 +66,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result<TData> UnAuthorized(string errorMessage)
+        public static Result<TData> UnAuthorized(string? errorMessage = null)
         {
             return new Result<TData>()
             {
@@ -76,7 +76,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result<TData> Forbidden(string errorMessage)
+        public static Result<TData> Forbidden(string? errorMessage = null)
         {
             return new Result<TData>()
             {
@@ -86,7 +86,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result<TData> NotFound(string errorMessage)
+        public static Result<TData> NotFound(string? errorMessage = null)
         {
             return new Result<TData>()
             {
@@ -96,7 +96,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result<TData> Conflict(string errorMessage)
+        public static Result<TData> Conflict(string? errorMessage = null)
         {
             return new Result<TData>()
             {
@@ -106,7 +106,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result<TData> ValidationError(string errorMessage)
+        public static Result<TData> ValidationError(string? errorMessage = null)
         {
             return new Result<TData>()
             {
@@ -117,7 +117,7 @@ namespace IMustafaZeynali.IResultPattern
         }
 
 
-        public static Result<TData> InternalServerError(string errorMessage)
+        public static Result<TData> InternalServerError(string? errorMessage = null)
         {
             return new Result<TData>()
             {
@@ -127,7 +127,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result<TData> ServiceUnavailable(string errorMessage)
+        public static Result<TData> ServiceUnavailable(string? errorMessage = null)
         {
             return new Result<TData>()
             {
@@ -175,7 +175,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result Created(string errorMessage)
+        public static Result Created(string? errorMessage = null)
         {
             return new Result()
             {
@@ -185,7 +185,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result NoContent(string errorMessage)
+        public static Result NoContent(string? errorMessage = null)
         {
             return new Result()
             {
@@ -196,7 +196,7 @@ namespace IMustafaZeynali.IResultPattern
         }
 
 
-        public static Result BadRequest(string errorMessage)
+        public static Result BadRequest(string? errorMessage = null)
         {
             return new Result()
             {
@@ -206,7 +206,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result UnAuthorized(string errorMessage)
+        public static Result UnAuthorized(string? errorMessage = null)
         {
             return new Result()
             {
@@ -216,7 +216,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result Forbidden(string errorMessage)
+        public static Result Forbidden(string? errorMessage = null)
         {
             return new Result()
             {
@@ -226,7 +226,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result NotFound(string errorMessage)
+        public static Result NotFound(string? errorMessage = null)
         {
             return new Result()
             {
@@ -236,7 +236,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result Conflict(string errorMessage)
+        public static Result Conflict(string? errorMessage = null)
         {
             return new Result()
             {
@@ -246,7 +246,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result ValidationError(string errorMessage)
+        public static Result ValidationError(string? errorMessage = null)
         {
             return new Result()
             {
@@ -257,7 +257,7 @@ namespace IMustafaZeynali.IResultPattern
         }
 
 
-        public static Result InternalServerError(string errorMessage)
+        public static Result InternalServerError(string? errorMessage = null)
         {
             return new Result()
             {
@@ -267,7 +267,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result ServiceUnavailable(string errorMessage)
+        public static Result ServiceUnavailable(string? errorMessage = null)
         {
             return new Result()
             {

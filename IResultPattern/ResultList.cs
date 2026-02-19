@@ -65,7 +65,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static ResultList<TData> Created(string errorMessage)
+        public static ResultList<TData> Created(string? errorMessage = null)
         {
             return new ResultList<TData>()
             {
@@ -75,7 +75,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static ResultList<TData> NoContent(string errorMessage)
+        public static ResultList<TData> NoContent(string? errorMessage = null)
         {
             return new ResultList<TData>()
             {
@@ -86,7 +86,7 @@ namespace IMustafaZeynali.IResultPattern
         }
 
 
-        public static ResultList<TData> BadRequest(string errorMessage)
+        public static ResultList<TData> BadRequest(string? errorMessage = null)
         {
             return new ResultList<TData>()
             {
@@ -96,7 +96,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static ResultList<TData> UnAuthorized(string errorMessage)
+        public static ResultList<TData> UnAuthorized(string? errorMessage = null)
         {
             return new ResultList<TData>()
             {
@@ -106,7 +106,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static ResultList<TData> Forbidden(string errorMessage)
+        public static ResultList<TData> Forbidden(string? errorMessage = null)
         {
             return new ResultList<TData>()
             {
@@ -116,7 +116,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static ResultList<TData> NotFound(string errorMessage)
+        public static ResultList<TData> NotFound(string? errorMessage = null)
         {
             return new ResultList<TData>()
             {
@@ -126,7 +126,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static ResultList<TData> Conflict(string errorMessage)
+        public static ResultList<TData> Conflict(string? errorMessage = null)
         {
             return new ResultList<TData>()
             {
@@ -136,7 +136,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static ResultList<TData> ValidationError(string errorMessage)
+        public static ResultList<TData> ValidationError(string? errorMessage = null)
         {
             return new ResultList<TData>()
             {
@@ -147,7 +147,7 @@ namespace IMustafaZeynali.IResultPattern
         }
 
 
-        public static ResultList<TData> InternalServerError(string errorMessage)
+        public static ResultList<TData> InternalServerError(string? errorMessage = null)
         {
             return new ResultList<TData>()
             {
@@ -157,7 +157,7 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static ResultList<TData> ServiceUnavailable(string errorMessage)
+        public static ResultList<TData> ServiceUnavailable(string? errorMessage = null)
         {
             return new ResultList<TData>()
             {
