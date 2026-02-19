@@ -2,18 +2,20 @@
 
 namespace IMustafaZeynali.IResultPattern
 {
-    public struct Result : IResult
+    public struct Result<TData> : IResult
+              where TData : class
     {
         public bool IsSuccess { get; set; }
         public string? Message { get; set; }
+        public TData? Data { get; set; }
         public ResultStatusCode StatusCode { get; set; }
         public string StatusCodeTitle => this.StatusCode.ToString();
 
 
         [Obsolete("Use specific status instead.")]
-        public static Result Failure(string errorMessage)
+        public static Result<TData> Failure(string errorMessage)
         {
-            return new Result()
+            return new Result<TData>()
             {
                 IsSuccess = false,
                 Message = errorMessage,
@@ -22,18 +24,19 @@ namespace IMustafaZeynali.IResultPattern
         }
 
 
-        public static Result Success()
+        public static Result<TData> Success(TData data)
         {
-            return new Result()
+            return new Result<TData>()
             {
+                Data = data,
                 IsSuccess = true,
                 StatusCode = ResultStatusCode.Success,
             };
         }
 
-        public static Result Created(string? errorMessage = null)
+        public static Result<TData> Created(string? errorMessage = null)
         {
-            return new Result()
+            return new Result<TData>()
             {
                 IsSuccess = false,
                 Message = errorMessage,
@@ -41,9 +44,9 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result NoContent(string? errorMessage = null)
+        public static Result<TData> NoContent(string? errorMessage = null)
         {
-            return new Result()
+            return new Result<TData>()
             {
                 IsSuccess = false,
                 Message = errorMessage,
@@ -52,9 +55,9 @@ namespace IMustafaZeynali.IResultPattern
         }
 
 
-        public static Result BadRequest(string? errorMessage = null)
+        public static Result<TData> BadRequest(string? errorMessage = null)
         {
-            return new Result()
+            return new Result<TData>()
             {
                 IsSuccess = false,
                 Message = errorMessage,
@@ -62,9 +65,9 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result UnAuthorized(string? errorMessage = null)
+        public static Result<TData> UnAuthorized(string? errorMessage = null)
         {
-            return new Result()
+            return new Result<TData>()
             {
                 IsSuccess = false,
                 Message = errorMessage,
@@ -72,9 +75,9 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result Forbidden(string? errorMessage = null)
+        public static Result<TData> Forbidden(string? errorMessage = null)
         {
-            return new Result()
+            return new Result<TData>()
             {
                 IsSuccess = false,
                 Message = errorMessage,
@@ -82,9 +85,9 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result NotFound(string? errorMessage = null)
+        public static Result<TData> NotFound(string? errorMessage = null)
         {
-            return new Result()
+            return new Result<TData>()
             {
                 IsSuccess = false,
                 Message = errorMessage,
@@ -92,9 +95,9 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result Conflict(string? errorMessage = null)
+        public static Result<TData> Conflict(string? errorMessage = null)
         {
-            return new Result()
+            return new Result<TData>()
             {
                 IsSuccess = false,
                 Message = errorMessage,
@@ -102,9 +105,9 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result ValidationError(string? errorMessage = null)
+        public static Result<TData> ValidationError(string? errorMessage = null)
         {
-            return new Result()
+            return new Result<TData>()
             {
                 IsSuccess = false,
                 Message = errorMessage,
@@ -113,9 +116,9 @@ namespace IMustafaZeynali.IResultPattern
         }
 
 
-        public static Result InternalServerError(string? errorMessage = null)
+        public static Result<TData> InternalServerError(string? errorMessage = null)
         {
-            return new Result()
+            return new Result<TData>()
             {
                 IsSuccess = false,
                 Message = errorMessage,
@@ -123,14 +126,20 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
-        public static Result ServiceUnavailable(string? errorMessage = null)
+        public static Result<TData> ServiceUnavailable(string? errorMessage = null)
         {
-            return new Result()
+            return new Result<TData>()
             {
                 IsSuccess = false,
                 Message = errorMessage,
                 StatusCode = ResultStatusCode.ServiceUnavailable,
             };
+        }
+
+
+        public static implicit operator Result<TData>(TData data)
+        {
+            return Success(data);
         }
 
     }
