@@ -1,4 +1,4 @@
-﻿namespace IMustafaZeynali.IResultPattern
+﻿namespace IResultPattern.Contracts
 {
     public interface IPageInfo
     {
