@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IResultPattern
+namespace IMustafaZeynali.IResultPattern
 {
     public enum ResultStatusCode : uint
     {

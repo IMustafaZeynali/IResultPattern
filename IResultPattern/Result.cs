@@ -1,4 +1,3 @@
-﻿using IResultPattern;
 using System;
 
 namespace IMustafaZeynali.IResultPattern

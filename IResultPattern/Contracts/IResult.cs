@@ -1,4 +1,4 @@
-﻿namespace IResultPattern
+﻿namespace IMustafaZeynali.IResultPattern
 {
     public interface IResult
     {
