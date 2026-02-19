@@ -26,7 +26,7 @@ namespace IMustafaZeynali.IResultPattern
             return new ResultList<TData>()
             {
                 Message = errorMessage,
-                StatusCode = ResultStatus.Failure,
+                StatusCode = ResultStatus.InternalServerError,
             };
         }
 

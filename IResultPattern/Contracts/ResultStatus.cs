@@ -4,9 +4,6 @@ namespace IMustafaZeynali.IResultPattern
 {
     public enum ResultStatus : uint
     {
-        [Obsolete("Use specific status instead.")]
-        Failure = 0,
-
         Success = 200,
         Created = 201,
         NoContent = 204,
