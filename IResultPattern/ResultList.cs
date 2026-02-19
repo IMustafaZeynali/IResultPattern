@@ -8,7 +8,7 @@ namespace IMustafaZeynali.IResultPattern
     public struct ResultList<TData> : IResult, IPageInfo
           where TData : class
     {
-        public bool IsSuccess => StatusCode == ResultStatus.Success;
+        public bool IsSuccess => ReulstPatternExtenssion.CalculateIsSuccess(this.StatusCode);
         public string? Message { get; set; }
         public IEnumerable<TData>? Data { get; set; }
 

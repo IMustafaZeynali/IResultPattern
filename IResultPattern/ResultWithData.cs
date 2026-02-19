@@ -5,7 +5,7 @@ namespace IMustafaZeynali.IResultPattern
     public struct Result<TData> : IResult
               where TData : class
     {
-        public bool IsSuccess => StatusCode == ResultStatus.Success;
+        public bool IsSuccess => ReulstPatternExtenssion.CalculateIsSuccess(this.StatusCode);
         public string? Message { get; set; }
         public TData? Data { get; set; }
         public ResultStatus StatusCode { get; set; }

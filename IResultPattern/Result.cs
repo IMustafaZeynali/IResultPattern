@@ -4,7 +4,7 @@ namespace IMustafaZeynali.IResultPattern
 {
     public struct Result : IResult
     {
-        public bool IsSuccess => StatusCode == ResultStatus.Success;
+        public bool IsSuccess => ReulstPatternExtenssion.CalculateIsSuccess(this.StatusCode);
         public string? Message { get; set; }
         public ResultStatus StatusCode { get; set; }
         public string StatusTitle => this.StatusCode.ToString();
