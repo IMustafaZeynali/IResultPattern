@@ -39,7 +39,7 @@ namespace IMustafaZeynali.IResultPattern
             {
                 Data = data,
                 TotalItemCount = totalItemCount,
-                PageCount = ((int)(Math.Round(((decimal)(totalItemCount / data.Count())), 0, MidpointRounding.AwayFromZero))),
+                PageCount = GetPageCount(totalItemCount: totalItemCount, data: data),
                 PageNumber = 1,
                 PageSize = totalItemCount,
                 StatusCode = ResultStatus.Success,
@@ -153,5 +153,14 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
+        private static int GetPageCount(int totalItemCount, IEnumerable<TData> data)
+        {
+            if (totalItemCount is 0 || data?.Count() is 0)
+                return 0;
+
+            var res = (int)(Math.Round(((decimal)(totalItemCount / data.Count())), 0, MidpointRounding.AwayFromZero));
+
+            return res;
+        }
     }
 }
