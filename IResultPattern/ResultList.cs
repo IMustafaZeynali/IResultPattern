@@ -30,6 +30,14 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
+        public static ResultList<TData> Failure(ResultStatus resultStatus, string? errorMessage = null)
+        {
+            return new ResultList<TData>()
+            {
+                Message = errorMessage,
+                StatusCode = resultStatus,
+            };
+        }
 
         public static ResultList<TData> Success(
             IEnumerable<TData> data,

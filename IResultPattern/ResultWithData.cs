@@ -22,6 +22,15 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
+        public static Result<TData> Failure(ResultStatus resultStatus, string? errorMessage = null)
+        {
+            return new Result<TData>()
+            {
+                Message = errorMessage,
+                StatusCode = resultStatus,
+            };
+        }
+
 
         public static Result<TData> Success(TData data)
         {
