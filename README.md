@@ -43,13 +43,9 @@ This enables clear and predictable API behavior.
 
 🔹 Strongly-Typed Results
 ``` C#
-// for single data/result:
 Result
-Result<T>
-
-// for list/multiple data/result:
-ResultList
-ResultList<T>
+Result<TData>
+ResultList<TData>
 ```
 
 
