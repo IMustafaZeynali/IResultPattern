@@ -87,14 +87,6 @@ Exceptions should represent exceptional conditions — not validation failures o
 * Clearer code semantics
 
 # 🔥 Example
-#### for single Data/Result
-``` C#
-return Result<TData>.Success(data);
-
-return Result<TData>.NotFound("User not found");
-
-return Result<TData>.ValidationError(error);
-```
 
 #### for without any Data/Result
 ``` C#
@@ -103,6 +95,15 @@ return Result.Success();
 return Result.NotFound("User not found");
 
 return Result.ValidationError(error);
+```
+
+#### for single Data/Result
+``` C#
+return Result<TData>.Success(data);
+
+return Result<TData>.NotFound("User not found");
+
+return Result<TData>.ValidationError(error);
 ```
 
 #### for Multiple/List items of Data/Result
