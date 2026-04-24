@@ -87,7 +87,7 @@ return Result.Success(data);
 
 return Result.NotFound("User not found");
 
-return Result.ValidationError(errors);
+return Result.ValidationError(error);
 ```
 
 
