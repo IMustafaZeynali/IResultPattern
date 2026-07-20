@@ -49,7 +49,7 @@ namespace IMustafaZeynali.IResultPattern
                 TotalItemCount = totalItemCount,
                 PageCount = GetPageCount(totalItemCount: totalItemCount, data: data),
                 PageNumber = 1,
-                PageSize = totalItemCount,
+                PageSize = data.Count(),
                 StatusCode = ResultStatus.Success,
             };
         }
