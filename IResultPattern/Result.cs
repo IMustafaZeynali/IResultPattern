@@ -130,5 +130,25 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
+        public static implicit operator Result(ResultStatus resultStatus)
+        {
+            if (ReulstPatternExtenssion.CalculateIsSuccess(resultStatus))
+            {
+                switch (resultStatus)
+                {
+                    case ResultStatus.Success:
+                        return Success();
+
+                    case ResultStatus.Created:
+                        return Created();
+
+                    case ResultStatus.NoContent:
+                        return NoContent();
+                }
+            }
+
+            return Failure(resultStatus);
+        }
+
     }
 }

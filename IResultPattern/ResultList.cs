@@ -161,6 +161,16 @@ namespace IMustafaZeynali.IResultPattern
             };
         }
 
+
+        public static implicit operator ResultList<TData>(ResultStatus resultStatus)
+        {
+            if (ReulstPatternExtenssion.CalculateIsSuccess(resultStatus))
+                throw new InvalidResultOperationException();
+
+            return Failure(resultStatus);
+        }
+
+
         private static int GetPageCount(int totalItemCount, IEnumerable<TData> data)
         {
             if (totalItemCount is 0 || data?.Count() is 0)

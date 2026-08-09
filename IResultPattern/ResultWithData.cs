@@ -139,5 +139,13 @@ namespace IMustafaZeynali.IResultPattern
             return Success(data);
         }
 
+        public static implicit operator Result<TData>(ResultStatus resultStatus)
+        {
+            if (ReulstPatternExtenssion.CalculateIsSuccess(resultStatus))
+                throw new InvalidResultOperationException();
+
+            return Failure(resultStatus);
+        }
+
     }
 }
