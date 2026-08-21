@@ -8,8 +8,12 @@ Stop returning raw exceptions for expected outcomes.
 Stop mixing business logic with HTTP responses.  
 Start modeling results explicitly.
 
-[![NuGet](https://img.shields.io/nuget/v/IResultPattern.svg)](https://www.nuget.org/packages/IResultPattern)
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![NuGet](https://img.shields.io/nuget/v/IResultPattern.svg)](https://www.nuget.org/packages/IResultPattern/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/IResultPattern.svg)](https://www.nuget.org/packages/IResultPattern/)
+[![GitHub Stars](https://img.shields.io/github/stars/IMustafaZeynali/IResultPattern)](https://github.com/IMustafaZeynali/IResultPattern)
+[![License](https://img.shields.io/github/license/IMustafaZeynali/IResultPattern)](LICENSE)
+
+📦 **NuGet:** https://www.nuget.org/packages/IResultPattern/
 
 ---
 
