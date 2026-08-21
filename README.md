@@ -1,132 +1,180 @@
-﻿# iResultPattern
-A lightweight and expressive result‑handling package designed for .NET applications.
-<br>
-🚀 IResult Pattern – A Clean, Explicit and Production-Ready Result Model for .NET
+﻿# 🚀 IResultPattern
 
-Stop returning raw exceptions.
-Stop mixing business logic with HTTP responses.
+A lightweight and expressive result-handling package for .NET applications.
+
+**✨ Clean. Explicit. Production-ready.**
+
+Stop returning raw exceptions for expected outcomes.  
+Stop mixing business logic with HTTP responses.  
 Start modeling results explicitly.
 
-# 🎯 What Is This Package?
+[![NuGet](https://img.shields.io/nuget/v/IResultPattern.svg)](https://www.nuget.org/packages/IResultPattern)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
-IResult Pattern is a lightweight, production-ready result modeling library for .NET applications that provides a clean and consistent way to represent operation outcomes.
+---
 
-Instead of throwing exceptions for flow control or returning loosely structured responses, this package helps you return strongly-typed, explicit, and predictable results across your application layers.
+## 🎯 What is this package?
 
-## Perfect for:
+**IResultPattern** is a dependency-free result modeling library for .NET. It gives you a consistent, strongly-typed way to represent operation outcomes across application layers.
 
-* ASP.NET Core Web APIs
-* Clean Architecture
-* Domain-Driven Design (DDD)
-* Microservices
-* Event-Driven systems
-* Modular monoliths
+Instead of throwing exceptions for flow control or returning loosely structured responses, you return explicit, predictable results.
 
-# ✨ Key Features
-🔹 Explicit Status Modeling
+### ✅ Perfect for
 
-## Includes structured result statuses aligned with HTTP semantics:
+- ASP.NET Core Web APIs
+- Clean Architecture
+- Domain-Driven Design (DDD)
+- Microservices
+- Event-driven systems
+- Modular monoliths
 
-* Success (200)
-* Created (201)
-* NoContent (204)
-* BadRequest (400)
-* Unauthorized (401)
-* Forbidden (403)
-* NotFound (404)
-* Conflict (409)
-* ValidationError (422)
-* InternalServerError (500)
-* ServiceUnavailable (503)
+---
 
-This enables clear and predictable API behavior.
+## 📦 Install
 
-🔹 Strongly-Typed Results
-``` C#
-Result
-Result<TData>
-ResultList<TData>
+```bash
+dotnet add package IResultPattern
 ```
 
+```csharp
+using IMustafaZeynali.IResultPattern;
+```
 
-Return data safely with proper status and messages.
+---
 
-🔹 Backward Compatible
+## ✨ Key features
 
-Legacy Failure status is still supported (marked as obsolete), ensuring no breaking changes for existing systems.
+### 🔹 Explicit status modeling
 
-🔹 Clean Architecture Friendly
+Statuses are aligned with HTTP semantics:
 
-## Designed to:
+| Status | Code |
+|--------|------|
+| Success | 200 |
+| Created | 201 |
+| NoContent | 204 |
+| BadRequest | 400 |
+| Unauthorized | 401 |
+| Forbidden | 403 |
+| NotFound | 404 |
+| Conflict | 409 |
+| ValidationError | 422 |
+| InternalServerError | 500 |
+| ServiceUnavailable | 503 |
 
-* Separate business logic from transport layer concerns
-* Improve readability
-* Reduce exception misuse
-* Provide consistent response contracts
+### 🔹 Strongly-typed results
 
-🔹 Lightweight & Dependency-Free
+```csharp
+Result              // no payload
+Result<TData>       // single item
+ResultList<TData>   // collection + pagination
+```
 
-* No external dependencies.
-* No magic.
-* Just clean, explicit result modeling.
+`TData` must be a reference type (`class`).
 
-# 🧠 Why Use This Instead of Exceptions?
+### 🔹 Built-in pagination
 
-Exceptions should represent exceptional conditions — not validation failures or predictable outcomes.
+`ResultList<T>` implements `IPageInfo` with:
 
-## This package encourages:
+- `TotalItemCount`
+- `PageCount`
+- `PageNumber`
+- `PageSize`
 
-* Explicit business outcomes
-* Better error handling
-* Improved API consistency
-* Easier testing
-* Clearer code semantics
+### 🔹 Clean Architecture friendly
 
-# 🔥 Example
+- Separates business outcomes from transport concerns
+- Improves readability and testability
+- Reduces exception misuse
+- Provides a consistent response contract
 
-#### for without any Data/Result
-``` C#
+### 🔹 Lightweight & dependency-free
+
+- No external dependencies
+- Targets `netstandard2.1`
+- Explicit factory methods — no hidden magic
+
+### 🔹 Backward compatible
+
+The legacy `Failure(string)` overloads remain available and are marked `[Obsolete]`. Prefer specific status methods instead.
+
+---
+
+## 🧠 Why use this instead of exceptions?
+
+Exceptions should represent exceptional conditions — not validation failures or other predictable outcomes.
+
+This package encourages:
+
+- Explicit business outcomes
+- Better error handling
+- Consistent API behavior
+- Easier testing
+- Clearer code semantics
+
+---
+
+## 🔥 Examples
+
+### 📄 Without data
+
+```csharp
 return Result.Success();
 
 return Result.NotFound("User not found");
 
-return Result.ValidationError(error);
+return Result.ValidationError("Email is required");
 ```
 
-#### for single Data/Result
-``` C#
-return Result<TData>.Success(data);
+### 📌 Single item
 
-return Result<TData>.NotFound("User not found");
+```csharp
+return Result<User>.Success(user);
 
-return Result<TData>.ValidationError(error);
+return Result<User>.NotFound("User not found");
+
+return Result<User>.ValidationError("Email is required");
 ```
 
-#### for Multiple/List items of Data/Result
-``` C#
-return ResultList<TData>.Success(ListOfData);
+### 📚 List with pagination
 
-return ResultList<TData>.NotFound("User not found");
+```csharp
+return ResultList<User>.Success(users, totalItemCount: 120);
 
-return ResultList<TData>.ValidationError(error);
+return ResultList<User>.Success(users, pageInfo);
+
+return ResultList<User>.NotFound("No users found");
+
+return ResultList<User>.ValidationError("Invalid page size");
 ```
 
+### ⚡ Implicit conversions
 
-## Clean. Predictable. Maintainable.
+```csharp
+Result result = ResultStatus.NotFound;   // failure statuses
+Result<User> ok = user;                  // wraps as Success
+```
 
-# 🎯 Who Is This For?
+---
 
-This package is ideal for developers who:
+## 👥 Who is this for?
 
-Care about clean code
+Developers who:
 
-* Use DDD or Clean Architecture
-* Want explicit and expressive application flow
-* Build scalable APIs and services
+- Care about clean, explicit code
+- Use DDD or Clean Architecture
+- Want expressive application flow
+- Build scalable APIs and services
 
-If you believe that clarity and correctness matter in software design —
-this package is for you.
+---
 
-🐞 Found a bug?  
-Please open an issue on GitHub:
-https://github.com/IMustafaZeynali/IResultPattern/issues
+## 📄 License
+
+Licensed under the [Apache License 2.0](LICENSE).
+
+---
+
+## 🐞 Contributing
+
+Found a bug or have an idea?  
+Open an issue: https://github.com/IMustafaZeynali/IResultPattern/issues
