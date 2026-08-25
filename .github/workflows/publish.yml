@@ -61,8 +61,11 @@ jobs:
             exit 1
           fi
 
+      - name: Build
+        run: dotnet build IResultPattern/IResultPattern.csproj --configuration Release
+
       - name: Pack NuGet package
-        run: dotnet pack IResultPattern/IResultPattern.csproj --configuration Release --output ./nupkg
+        run: dotnet pack IResultPattern/IResultPattern.csproj --configuration Release --no-build --output ./nupkg
 
       - name: Publish to NuGet.org
         run: dotnet nuget push "nupkg/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
