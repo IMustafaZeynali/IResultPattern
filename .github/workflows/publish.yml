@@ -2,11 +2,20 @@ name: Publish to NuGet
 
 on:
   release:
-    types: [published] 
+    types: [published]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nuget-publish-${{ github.event.release.tag_name }}
+  cancel-in-progress: false
 
 jobs:
-  build:
+  test:
+    name: Build & Test
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout repository
@@ -16,18 +25,46 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
+          cache: true
 
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Build project
+      - name: Build
         run: dotnet build --configuration Release --no-restore
 
       - name: Run tests
-        run: dotnet test --no-build --configuration Release
+        run: dotnet test --configuration Release --no-build --verbosity normal
+
+  publish:
+    name: Pack & Publish
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+          cache: true
+
+      - name: Verify version matches release tag
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          VERSION=$(sed -n 's/.*<Version>\([^<]*\)<\/Version>.*/\1/p' IResultPattern/IResultPattern.csproj | head -n 1)
+          echo "Release tag: $TAG"
+          echo "Project version: $VERSION"
+          if [ "$TAG" != "$VERSION" ]; then
+            echo "::error::Release tag ($TAG) does not match project version ($VERSION)."
+            exit 1
+          fi
 
       - name: Pack NuGet package
-        run: dotnet pack --configuration Release --no-build --output ./nupkg
+        run: dotnet pack IResultPattern/IResultPattern.csproj --configuration Release --output ./nupkg
 
       - name: Publish to NuGet.org
-        run: dotnet nuget push "nupkg/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+        run: dotnet nuget push "nupkg/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
