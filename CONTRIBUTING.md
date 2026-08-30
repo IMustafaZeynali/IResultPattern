@@ -63,6 +63,15 @@ High | Medium | Low — <one-line reason>
 | **Medium** | Naming/API clarity that does not break runtime logic |
 | **Low** | Internal typos, presentation cleanup, non-urgent breaking removals |
 
+### Automated checks
+
+New and edited issues are validated by CI:
+
+- Title must match `feat|fix|refactor|docs|chore` (optional scope), then `: `, then a non-empty summary
+- Body must include **Summary**, **Problem**, **Proposed change**, and **Priority**
+
+Issues that fail are labeled `invalid`, commented, and closed. Fix the title/body and reopen, or open a new issue with a template.
+
 ---
 
 ## Pull requests

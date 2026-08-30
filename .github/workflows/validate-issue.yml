@@ -1,0 +1,178 @@
+name: Validate Issue
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+
+permissions:
+  issues: write
+
+concurrency:
+  group: validate-issue-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Check title and body
+    runs-on: ubuntu-latest
+    # Skip PRs mistakenly triggering as issues; only real issues
+    if: github.event.issue.pull_request == null
+    timeout-minutes: 5
+
+    steps:
+      - name: Validate issue format
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const title = (issue.title || "").trim();
+            const body = issue.body || "";
+
+            const titlePattern = /^(feat|fix|refactor|docs|chore)(\([^)]+\))?: .+\S$/;
+            const requiredHeadings = [
+              "## Summary",
+              "## Problem",
+              "## Proposed change",
+              "## Priority",
+            ];
+
+            // GitHub issue forms render fields as ### Heading
+            const formHeadings = [
+              "### Summary",
+              "### Problem",
+              "### Proposed change",
+              "### Priority",
+            ];
+
+            const errors = [];
+
+            if (!titlePattern.test(title)) {
+              errors.push(
+                "Title must match: `feat|fix|refactor|docs|chore` + optional `(scope)` + `: ` + imperative summary.\n" +
+                "Examples: `feat: Support value types in Result of T`, `fix(typo): Rename ReulstPatternExtenssion to ResultPatternExtension`"
+              );
+            }
+
+            const hasMarkdownSections = requiredHeadings.every((h) =>
+              new RegExp(`^${h.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*$`, "mi").test(body)
+            );
+            const hasFormSections = formHeadings.every((h) =>
+              new RegExp(`^${h.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*$`, "mi").test(body)
+            );
+
+            if (!hasMarkdownSections && !hasFormSections) {
+              errors.push(
+                "Body must include these sections: **Summary**, **Problem**, **Proposed change**, **Priority**.\n" +
+                "Use the issue form templates, or follow the template in [CONTRIBUTING.md](https://github.com/IMustafaZeynali/IResultPattern/blob/main/CONTRIBUTING.md)."
+              );
+            }
+
+            // Treat empty / "No response" form fields as incomplete
+            const emptyField = (heading) => {
+              const escaped = heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+              const match = body.match(
+                new RegExp(`${escaped}\\s*\\n([\\s\\S]*?)(?=\\n### |\\n## |$)`, "i")
+              );
+              if (!match) return false;
+              const content = match[1].replace(/\r/g, "").trim();
+              return content === "" || /^No response$/i.test(content);
+            };
+
+            const headingsToCheck = hasFormSections ? formHeadings : requiredHeadings;
+            if (hasMarkdownSections || hasFormSections) {
+              const empty = headingsToCheck.filter(emptyField);
+              if (empty.length > 0) {
+                errors.push(
+                  `These sections are empty: ${empty.map((h) => h.replace(/^#+\s*/, "")).join(", ")}`
+                );
+              }
+            }
+
+            const marker = "<!-- validate-issue-bot -->";
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              per_page: 100,
+            });
+            const botComment = comments.find((c) => c.body && c.body.includes(marker));
+
+            if (errors.length === 0) {
+              if (issue.state === "closed" && (issue.labels || []).some((l) => l.name === "invalid")) {
+                await github.rest.issues.removeLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  name: "invalid",
+                }).catch(() => {});
+              }
+              if (botComment) {
+                await github.rest.issues.deleteComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: botComment.id,
+                });
+              }
+              core.info("Issue format is valid.");
+              return;
+            }
+
+            const commentBody = [
+              marker,
+              "This issue was closed because it does not follow the project conventions.",
+              "",
+              "### What to fix",
+              ...errors.map((e) => `- ${e}`),
+              "",
+              "Please update the title/body to match [CONTRIBUTING.md](https://github.com/IMustafaZeynali/IResultPattern/blob/main/CONTRIBUTING.md), then reopen (or open a new issue via the templates).",
+            ].join("\n");
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              labels: ["invalid"],
+            }).catch(async () => {
+              // Label may not exist yet — create it once
+              await github.rest.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: "invalid",
+                color: "B60205",
+                description: "Does not follow issue conventions",
+              }).catch(() => {});
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: ["invalid"],
+              });
+            });
+
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: commentBody,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: commentBody,
+              });
+            }
+
+            if (issue.state !== "closed") {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: "closed",
+                state_reason: "not_planned",
+              });
+            }
+
+            core.setFailed("Issue format is invalid.");
