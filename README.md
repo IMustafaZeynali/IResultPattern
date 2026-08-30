@@ -181,4 +181,4 @@ Licensed under the [Apache License 2.0](LICENSE).
 ## 🐞 Contributing
 
 Found a bug or have an idea?  
-Open an issue: https://github.com/IMustafaZeynali/IResultPattern/issues
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for issue title and body conventions, then open an issue: https://github.com/IMustafaZeynali/IResultPattern/issues

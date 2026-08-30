@@ -1,0 +1,40 @@
+name: Docs / Chore
+description: Documentation or small maintenance
+title: "docs: "
+labels: ["chore"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please read [CONTRIBUTING.md](https://github.com/IMustafaZeynali/IResultPattern/blob/main/CONTRIBUTING.md) before submitting.
+        Use `docs:` for documentation or `chore:` for typos / small cleanup. Update the title prefix accordingly.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: 1–3 sentences — what and why
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is missing or wrong
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed change
+      description: Actionable bullets
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - Medium
+        - Low
+    validations:
+      required: true

@@ -1,0 +1,46 @@
+name: Bug
+description: Report incorrect behavior
+title: "fix: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please read [CONTRIBUTING.md](https://github.com/IMustafaZeynali/IResultPattern/blob/main/CONTRIBUTING.md) before submitting.
+        Title format: `fix: <Imperative summary>` (optional scope: `fix(typo): ...`)
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: 1–3 sentences — what and why
+      placeholder: What is wrong
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Current behavior; include a short code sample if useful
+      placeholder: What happens today vs what you expect
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed change
+      description: Actionable bullets; note tests if needed
+      placeholder: |
+        - ...
+        - ...
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - High — correctness bug or major usability gap
+        - Medium — incorrect but limited impact
+        - Low — minor / cosmetic
+    validations:
+      required: true
