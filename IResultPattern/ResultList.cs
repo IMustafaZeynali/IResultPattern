@@ -8,7 +8,7 @@ namespace IMustafaZeynali.IResultPattern
     public struct ResultList<TData> : IResult, IPageInfo
           where TData : class
     {
-        public bool IsSuccess => ReulstPatternExtenssion.CalculateIsSuccess(this.StatusCode);
+        public bool IsSuccess => ResultPatternExtension.CalculateIsSuccess(this.StatusCode);
         public string? Message { get; set; }
         public IEnumerable<TData>? Data { get; set; }
 
@@ -164,7 +164,7 @@ namespace IMustafaZeynali.IResultPattern
 
         public static implicit operator ResultList<TData>(ResultStatus resultStatus)
         {
-            if (ReulstPatternExtenssion.CalculateIsSuccess(resultStatus))
+            if (ResultPatternExtension.CalculateIsSuccess(resultStatus))
                 throw new InvalidResultOperationException();
 
             return Failure(resultStatus);
