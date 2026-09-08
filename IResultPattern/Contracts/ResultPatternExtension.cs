@@ -1,6 +1,6 @@
 ﻿namespace IMustafaZeynali.IResultPattern
 {
-    internal static class ReulstPatternExtenssion
+    internal static class ResultPatternExtension
     {
 
         internal static bool CalculateIsSuccess(ResultStatus statusCode)

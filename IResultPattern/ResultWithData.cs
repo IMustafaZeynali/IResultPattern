@@ -5,7 +5,7 @@ namespace IMustafaZeynali.IResultPattern
     public struct Result<TData> : IResult
               where TData : class
     {
-        public bool IsSuccess => ReulstPatternExtenssion.CalculateIsSuccess(this.StatusCode);
+        public bool IsSuccess => ResultPatternExtension.CalculateIsSuccess(this.StatusCode);
         public string? Message { get; set; }
         public TData? Data { get; set; }
         public ResultStatus StatusCode { get; set; }
@@ -141,7 +141,7 @@ namespace IMustafaZeynali.IResultPattern
 
         public static implicit operator Result<TData>(ResultStatus resultStatus)
         {
-            if (ReulstPatternExtenssion.CalculateIsSuccess(resultStatus))
+            if (ResultPatternExtension.CalculateIsSuccess(resultStatus))
                 throw new InvalidResultOperationException();
 
             return Failure(resultStatus);

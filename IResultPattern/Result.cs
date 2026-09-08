@@ -4,7 +4,7 @@ namespace IMustafaZeynali.IResultPattern
 {
     public struct Result : IResult
     {
-        public bool IsSuccess => ReulstPatternExtenssion.CalculateIsSuccess(this.StatusCode);
+        public bool IsSuccess => ResultPatternExtension.CalculateIsSuccess(this.StatusCode);
         public string? Message { get; set; }
         public ResultStatus StatusCode { get; set; }
         public string StatusTitle => this.StatusCode.ToString();
@@ -132,7 +132,7 @@ namespace IMustafaZeynali.IResultPattern
 
         public static implicit operator Result(ResultStatus resultStatus)
         {
-            if (ReulstPatternExtenssion.CalculateIsSuccess(resultStatus))
+            if (ResultPatternExtension.CalculateIsSuccess(resultStatus))
             {
                 switch (resultStatus)
                 {
