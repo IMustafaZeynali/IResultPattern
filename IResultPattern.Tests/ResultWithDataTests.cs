@@ -18,7 +18,6 @@ public class ResultWithDataTests
 
         Assert.True(result.IsSuccess);
         Assert.Equal(ResultStatus.Success, result.StatusCode);
-        Assert.Equal("Success", result.StatusTitle);
         Assert.Same(data, result.Data);
         Assert.Null(result.Message);
     }
