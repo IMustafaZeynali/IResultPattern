@@ -187,4 +187,40 @@ public class ResultListTests
             ResultList<SampleDto> _ = status;
         });
     }
+
+
+    [Fact]
+    public void ResultList_Should_Have_Immutable_Properties()
+    {
+        var properties = typeof(ResultList<SampleDto>).GetProperties();
+
+        var messageProperty = properties.Single(
+            property => property.Name == nameof(ResultList<SampleDto>.Message));
+
+        var dataProperty = properties.Single(
+            property => property.Name == nameof(ResultList<SampleDto>.Data));
+
+        var totalItemCountProperty = properties.Single(
+            property => property.Name == nameof(ResultList<SampleDto>.TotalItemCount));
+
+        var pageCountProperty = properties.Single(
+            property => property.Name == nameof(ResultList<SampleDto>.PageCount));
+
+        var pageNumberProperty = properties.Single(
+            property => property.Name == nameof(ResultList<SampleDto>.PageNumber));
+
+        var pageSizeProperty = properties.Single(
+            property => property.Name == nameof(ResultList<SampleDto>.PageSize));
+
+        var statusCodeProperty = properties.Single(
+            property => property.Name == nameof(ResultList<SampleDto>.StatusCode));
+
+        Assert.False(messageProperty.CanWrite);
+        Assert.False(dataProperty.CanWrite);
+        Assert.False(totalItemCountProperty.CanWrite);
+        Assert.False(pageCountProperty.CanWrite);
+        Assert.False(pageNumberProperty.CanWrite);
+        Assert.False(pageSizeProperty.CanWrite);
+        Assert.False(statusCodeProperty.CanWrite);
+    }
 }

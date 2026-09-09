@@ -11,7 +11,6 @@ public class ResultTests
 
         Assert.True(result.IsSuccess);
         Assert.Equal(ResultStatus.Success, result.StatusCode);
-        Assert.Equal("Success", result.StatusTitle);
         Assert.Null(result.Message);
     }
 
@@ -24,7 +23,6 @@ public class ResultTests
 
         Assert.True(result.IsSuccess);
         Assert.Equal(ResultStatus.Created, result.StatusCode);
-        Assert.Equal("Created", result.StatusTitle);
         Assert.Equal(message, result.Message);
     }
 
@@ -68,7 +66,6 @@ public class ResultTests
 
         Assert.False(result.IsSuccess);
         Assert.Equal(expectedStatus, result.StatusCode);
-        Assert.Equal(expectedStatus.ToString(), result.StatusTitle);
         Assert.Equal(message, result.Message);
     }
 

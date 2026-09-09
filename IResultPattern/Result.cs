@@ -2,132 +2,113 @@
 
 namespace IMustafaZeynali.IResultPattern
 {
-    public struct Result : IResult
+    public readonly struct Result : IResult
     {
-        public bool IsSuccess => ResultPatternExtension.CalculateIsSuccess(this.StatusCode);
-        public string? Message { get; set; }
-        public ResultStatus StatusCode { get; set; }
-        public string StatusTitle => this.StatusCode.ToString();
+        public bool IsSuccess =>
+            ResultPatternExtension.CalculateIsSuccess(StatusCode);
 
+        public string? Message { get; }
+
+        public ResultStatus StatusCode { get; }
+
+        private Result(
+            ResultStatus statusCode,
+            string? message = null)
+        {
+            StatusCode = statusCode;
+            Message = message;
+        }
 
         [Obsolete("Use specific status instead.")]
         public static Result Failure(string errorMessage)
         {
-            return new Result()
-            {
-                Message = errorMessage,
-                StatusCode = ResultStatus.InternalServerError,
-            };
+            return new Result(
+                ResultStatus.InternalServerError,
+                errorMessage);
         }
 
-        public static Result Failure(ResultStatus resultStatus, string? errorMessage = null)
+        public static Result Failure(
+            ResultStatus resultStatus,
+            string? errorMessage = null)
         {
-            return new Result()
-            {
-                Message = errorMessage,
-                StatusCode = resultStatus,
-            };
+            return new Result(
+                resultStatus,
+                errorMessage);
         }
-
 
         public static Result Success()
         {
-            return new Result()
-            {
-                StatusCode = ResultStatus.Success,
-            };
+            return new Result(ResultStatus.Success);
         }
 
         public static Result Created(string? errorMessage = null)
         {
-            return new Result()
-            {
-                Message = errorMessage,
-                StatusCode = ResultStatus.Created,
-            };
+            return new Result(
+                ResultStatus.Created,
+                errorMessage);
         }
 
         public static Result NoContent(string? errorMessage = null)
         {
-            return new Result()
-            {
-                Message = errorMessage,
-                StatusCode = ResultStatus.NoContent,
-            };
+            return new Result(
+                ResultStatus.NoContent,
+                errorMessage);
         }
-
 
         public static Result BadRequest(string? errorMessage = null)
         {
-            return new Result()
-            {
-                Message = errorMessage,
-                StatusCode = ResultStatus.BadRequest,
-            };
+            return new Result(
+                ResultStatus.BadRequest,
+                errorMessage);
         }
 
         public static Result Unauthorized(string? errorMessage = null)
         {
-            return new Result()
-            {
-                Message = errorMessage,
-                StatusCode = ResultStatus.Unauthorized,
-            };
+            return new Result(
+                ResultStatus.Unauthorized,
+                errorMessage);
         }
 
         public static Result Forbidden(string? errorMessage = null)
         {
-            return new Result()
-            {
-                Message = errorMessage,
-                StatusCode = ResultStatus.Forbidden,
-            };
+            return new Result(
+                ResultStatus.Forbidden,
+                errorMessage);
         }
 
         public static Result NotFound(string? errorMessage = null)
         {
-            return new Result()
-            {
-                Message = errorMessage,
-                StatusCode = ResultStatus.NotFound,
-            };
+            return new Result(
+                ResultStatus.NotFound,
+                errorMessage);
         }
 
         public static Result Conflict(string? errorMessage = null)
         {
-            return new Result()
-            {
-                Message = errorMessage,
-                StatusCode = ResultStatus.Conflict,
-            };
+            return new Result(
+                ResultStatus.Conflict,
+                errorMessage);
         }
 
         public static Result ValidationError(string? errorMessage = null)
         {
-            return new Result()
-            {
-                Message = errorMessage,
-                StatusCode = ResultStatus.ValidationError,
-            };
+            return new Result(
+                ResultStatus.ValidationError,
+                errorMessage);
         }
-
 
         public static Result InternalServerError(string? errorMessage = null)
         {
-            return new Result()
-            {
-                Message = errorMessage,
-                StatusCode = ResultStatus.InternalServerError,
-            };
+            return new Result(
+                ResultStatus.InternalServerError,
+                errorMessage);
         }
 
         public static Result ServiceUnavailable(string? errorMessage = null)
         {
-            return new Result()
-            {
-                Message = errorMessage,
-                StatusCode = ResultStatus.ServiceUnavailable,
-            };
+            return new Result(
+                ResultStatus.ServiceUnavailable,
+                errorMessage);
         }
 
         public static implicit operator Result(ResultStatus resultStatus)
@@ -149,6 +130,5 @@ namespace IMustafaZeynali.IResultPattern
 
             return Failure(resultStatus);
         }
-
     }
 }

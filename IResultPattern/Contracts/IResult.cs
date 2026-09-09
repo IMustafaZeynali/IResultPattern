@@ -4,7 +4,6 @@
     {
         bool IsSuccess { get; }
         string? Message { get; }
-        ResultStatus StatusCode { get; set; }
-        string StatusTitle { get; }
+        ResultStatus StatusCode { get; }
     }
 }
