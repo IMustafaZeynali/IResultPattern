@@ -7,7 +7,6 @@ namespace IMustafaZeynali.IResultPattern
         public bool IsSuccess => ResultPatternExtension.CalculateIsSuccess(this.StatusCode);
         public string? Message { get; set; }
         public ResultStatus StatusCode { get; set; }
-        public string StatusTitle => this.StatusCode.ToString();
 
 
         [Obsolete("Use specific status instead.")]

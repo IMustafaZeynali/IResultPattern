@@ -9,7 +9,6 @@ namespace IMustafaZeynali.IResultPattern
         public string? Message { get; set; }
         public TData? Data { get; set; }
         public ResultStatus StatusCode { get; set; }
-        public string StatusTitle => this.StatusCode.ToString();
 
 
         [Obsolete("Use specific status instead.")]

@@ -102,6 +102,7 @@ ResultList<TData>   // collection + pagination
 
 The legacy `Failure(string)` overloads remain available and are marked `[Obsolete]`. Prefer specific status methods instead.
 
+> **Breaking change:** `StatusTitle` has been removed from the result types. Use `StatusCode` directly and map it to a display string at the presentation layer when needed.
 ---
 
 ## 🧠 Why use this instead of exceptions?
