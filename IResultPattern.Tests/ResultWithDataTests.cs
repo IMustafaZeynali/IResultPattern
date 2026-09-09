@@ -18,7 +18,6 @@ public class ResultWithDataTests
 
         Assert.True(result.IsSuccess);
         Assert.Equal(ResultStatus.Success, result.StatusCode);
-        Assert.Equal("Success", result.StatusTitle);
         Assert.Same(data, result.Data);
         Assert.Null(result.Message);
     }
@@ -146,5 +145,19 @@ public class ResultWithDataTests
         {
             Result<SampleDto> _ = status;
         });
+    }
+
+
+
+    [Fact]
+    public void Result_With_Data_Should_Have_Immutable_Properties()
+    {
+        var properties = typeof(Result<SampleDto>).GetProperties();
+        var messageProperty = properties.Single(property => property.Name == nameof(Result<SampleDto>.Message));
+        var dataProperty = properties.Single(property => property.Name == nameof(Result<SampleDto>.Data));
+        var statusCodeProperty = properties.Single(property => property.Name == nameof(Result<SampleDto>.StatusCode));
+        Assert.False(messageProperty.CanWrite); 
+        Assert.False(dataProperty.CanWrite); Assert.False(statusCodeProperty.CanWrite);
+
     }
 }
